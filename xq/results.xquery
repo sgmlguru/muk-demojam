@@ -4,6 +4,9 @@ declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
 let $presenters := collection('/db/MUK-data/demojam/')
 let $total := sum($presenters/presenters/person/@votes!number())
+
+let $show := 3
+
 return
 
 <html>
@@ -146,9 +149,9 @@ p {{
       <ol>
         {
           for $person in $presenters/presenters/person
-          order by number($person/@votes) descending
-          return
-          <li><b>{$person/name/text()}</b> - {$person/title/text()} - {format-number($person/@votes div $total, '0')}%</li>
+            order by number($person/@votes) descending
+            return
+            <li><b>{$person/name/text()}</b> - {$person/title/text()} - {format-number($person/@votes div $total * 100, '00')}%</li>
         }
       </ol>
     </body>
