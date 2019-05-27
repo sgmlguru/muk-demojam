@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="../xsltforms/xsltforms.xsl" type="text/xsl"?><?xml-model href="http://www.oxygenxml.com/1999/xhtml/xhtml-xforms.nvdl" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
@@ -143,7 +144,7 @@ p {
         </data>
       </xforms:instance>
       
-      <xforms:instance id="presenters" src="http://www.sgmlguru.org:8080/exist/rest/db/test/demojam/presenters.xml"/>
+      <xforms:instance id="presenters" src="../../MUK-data/demojam/presenters.xml"/>
       
       <xforms:submission id="vote" method="post" replace="all" action="xq/vote.xquery" instance="votes" ref="/data"/>
     </xforms:model>

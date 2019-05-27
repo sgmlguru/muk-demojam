@@ -6,7 +6,7 @@ let $login := xmldb:login('/db','admin','Favorit70')
 
 let $myvote := request:get-data()
 
-let $presenters := '/db/test/demojam/presenters.xml'
+let $presenters := '/db/MUK-data/demojam/presenters.xml'
 let $doc := doc($presenters)
 let $current-count := doc($presenters)//person[title=$myvote]/@votes
 let $update := update value $doc//person[title=$myvote]/@votes with $current-count + 1

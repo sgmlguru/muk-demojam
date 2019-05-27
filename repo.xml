@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta xmlns="http://exist-db.org/xquery/repo">
+    <description>MUK DemoJam admin and voting app</description>
+    <author>Ari Nordström and Tomos Hillman</author>
+    <website>https://markupuk.org</website>
+    <status>alpha</status>
+    <license>GNU-LGPL</license>
+    <copyright>true</copyright>
+    <type>application</type>
+    <target>muk-demojam</target>
+    <prepare>pre-install.xql</prepare>
+    <finish>admin</finish>
+<deployed>2019-05-27T15:48:26.858+02:00</deployed>
+</meta>

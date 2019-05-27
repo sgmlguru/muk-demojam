@@ -140,7 +140,7 @@ p {{
       <h1>Markup UK Demojam</h1>
       <ol>
         {
-          let $presenters := collection('/db/test/demojam/')
+          let $presenters := collection('/db/MUK-data/demojam/')
           for $person in $presenters/presenters/person
           order by util:random()
           return
