@@ -146,7 +146,8 @@ p {{
     <body>
       <h1>Markup UK Demojam Results</h1>
       <p>{$total} votes</p>
-      <ol>
+      {
+      let $winners := <ol>
         {
           for $person in $presenters/presenters/person
             order by number($person/@votes) descending
@@ -154,5 +155,8 @@ p {{
             <li><b>{$person/name/text()}</b> - {$person/title/text()} - {format-number($person/@votes div $total * 100, '00')}%</li>
         }
       </ol>
+      
+      return <ol>{$winners//li[count(preceding-sibling::li) <= 2]}</ol>
+      }
     </body>
 </html>
