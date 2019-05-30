@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <head>
-    <title>Add Speaker</title>
+    <title>Add Demos</title>
     
     <style type="text/css">
             /* CSS for XForms input field alignment */
@@ -25,22 +25,23 @@ label, legend {
 }
 
 /* give the fieldset some breathing room */
-/*fieldset {
-   margin-left: 30px;
+fieldset {
    margin-top: 30px;
    padding: 10px;
-   width: 260px;
-}*/
+   width: 600px;
+}
 
-/* the labels are right-aligned in a 150px wide column */
+/* the labels are right-aligned in a 100px wide column */
 xf|label {
-   width: 150px;
+   width: 50px;
    margin: 3px;
 }
 
 /* the input values are left aligned */
 xf|value {
    text-align: left;
+   width: 200px;
+   margin: 15px;
 }
 
 /* vertical area between input boxes */
@@ -54,9 +55,9 @@ xf|group {
 }
 
 /* each input is a row in the group table */
-xf|input {
+/*xf|input {
    display: table-row;
-}
+}*/
 
 xf|select1 {
   display: table-row;
@@ -97,19 +98,6 @@ xf|select1 xf|value {
   margin-bottom: 20px;
 }
 
-.regtype {
-  margin-top: 30px;
-}
-
-.country {
-  margin-top: 7px;
-  margin-bottom: 20px;
-}
-
-.discount {
-  margin-top: 30px;
-}
-
 p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9em;
@@ -134,46 +122,82 @@ p {
   width: 350px;
 }
 
+.demo-entry {
+  display: table-row;
+  padding: 10px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  border-style: solid;
+}
+
     </style>
     
     <xforms:model>
-      <xforms:instance id="data">
-        <data xmlns="">
+      <xforms:instance id="data" src="../../MUK-data/demojam/presenters.xml"/>
+      
+      <xforms:instance id="person">
+        <presenters xmlns="">
           <person votes="0">
             <name/>
             <title/>
           </person>
-        </data>
+        </presenters>        
       </xforms:instance>
       
       
-      <xforms:submission id="save" method="post" action="xq/addSpeaker.xquery" ref="person"/>
+      <!--<xforms:submission id="save" method="post" action="xq/addSpeaker.xquery" ref="person"/>-->
+      <xforms:submission id="save" method="post" action="../../MUK-data/demojam/presenters.xml" ref="/presenters"/>
       
       <xforms:action ev:event="xforms-ready">
-        <xforms:setfocus control="first"/>
+        <xforms:setfocus control="start"/>
       </xforms:action>
     </xforms:model>
     
   </head>
   <body>
     
-    <div>
+    <!-- Add Speakers -->
+    <xforms:group ref="/presenters">
+      <fieldset style="margin-top: 15px; margin-bottom: 5px;">
+        <legend>Demos</legend>
+        
+        <xforms:repeat id="speaker-repeat" nodeset="person">
+          <div class="demo-entry">
+            <xforms:input ref="name" incremental="true" id="start">
+              <xforms:label>Name</xforms:label>
+            </xforms:input>
+            <xforms:input ref="title" incremental="true">
+              <xforms:label>Title</xforms:label>
+            </xforms:input>
+          </div>
+        </xforms:repeat>
+        
+        <xforms:trigger>
+          <xforms:label>Add Demo</xforms:label>
+          <xforms:action ev:event="DOMActivate">
+            <xforms:insert nodeset="person" at="index('speaker-repeat')" position="after" origin="instance('person')/person"/>
+            <xforms:setvalue  ref="instance('person')/person/name" value="instance('person')/person/name"/>
+            <xforms:setvalue ref="instance('person')/person/title" value="instance('person')/person/title"/>
+          </xforms:action>
+        </xforms:trigger>
+        
+        <xforms:trigger>
+          <xforms:label>Delete Selected Demo</xforms:label>
+          <xforms:action ev:event="DOMActivate">
+            <xforms:delete nodeset="//person[index('speaker-repeat')]"/>
+          </xforms:action>
+        </xforms:trigger>
+        
+      </fieldset>
       
-      <xforms:input ref="person/name" id="first" incremental="true">
-        <xforms:label>Name</xforms:label>
-      </xforms:input>
+      <div>
+        <xforms:submit submission="save">
+          <xforms:label>Save</xforms:label>
+        </xforms:submit>
+      </div>
       
-      <xforms:input ref="person/title" id="second" incremental="true">
-        <xforms:label>Presentation Title</xforms:label>
-      </xforms:input>
-      
-    </div>
+    </xforms:group>
     
-    <div>
-      <xforms:submit submission="save">
-        <xforms:label>Submit</xforms:label>
-      </xforms:submit>
-    </div>
     
     <div class="debug">
       <xforms:output value="serialize(instance('data'),'yes')"/>
