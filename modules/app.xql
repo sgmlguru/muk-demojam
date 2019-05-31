@@ -3,7 +3,7 @@ xquery version "3.1";
 module namespace app="http://localhost:8080/apps/MUK-reg/templates";
 
 import module namespace templates="http://exist-db.org/xquery/templates" ;
-import module namespace config="http://localhost:8080/apps/MUK-reg/config" at "config.xqm";
+import module namespace config="http://localhost:8080/apps/muk-demojam/config" at "config.xqm";
 
 (:~
  : This is a sample templating function. It will be called by the templating module if
