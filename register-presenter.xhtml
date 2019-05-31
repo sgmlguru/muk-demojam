@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="../xsltforms/xsltforms.xsl" type="text/xsl"?><?xml-model href="http://www.oxygenxml.com/1999/xhtml/xhtml-xforms.nvdl" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <head>
     <!-- Favicon -->
@@ -140,36 +140,36 @@ p {
 
     </style>
     
-    <xforms:model>
-      <xforms:instance id="data" src="../../MUK-data/demojam/presenters.xml" ev:event="xforms-ready"/>
+    <xf:model>
+      <xf:instance id="data" src="http://localhost:8080/exist/rest/db/MUK-data/demojam/presenters.xml"/>
       
-      <xforms:instance id="cache">
+      <xf:instance id="cache">
         <presenters xmlns="">
           <person votes="0">
             <name/>
             <title/>
           </person>
         </presenters>
-      </xforms:instance>
+      </xf:instance>
       
-      <xforms:instance id="person">
+      <xf:instance id="person">
         <presenters xmlns="">
           <person votes="0">
             <name/>
             <title/>
           </person>
         </presenters>        
-      </xforms:instance>
+      </xf:instance>
       
       
-      <xforms:submission id="save" method="put" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
-      <xforms:submission id="read" method="get" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
+      <xf:submission id="save" method="put" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
+      <xf:submission id="read" method="get" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
       
       
-      <xforms:action ev:event="xforms-ready">
-        <xforms:setfocus control="start"/>
-      </xforms:action>
-    </xforms:model>
+      <xf:action ev:event="xforms-ready">
+        <xf:setfocus control="start"/>
+      </xf:action>
+    </xf:model>
     
   </head>
   <body>
@@ -180,56 +180,56 @@ p {
     </div>
     
     <!-- Add Speakers -->
-    <xforms:group ref="/presenters">
+    <xf:group ref="/presenters">
       <fieldset style="margin-top: 15px; margin-bottom: 5px;">
         <legend>Demos</legend>
         
-        <xforms:repeat id="speaker-repeat" nodeset="person">
+        <xf:repeat id="speaker-repeat" nodeset="person">
           <div class="demo-entry">
-            <xforms:input ref="name" incremental="true" id="start">
-              <xforms:label>Name</xforms:label>
-            </xforms:input>
-            <xforms:input ref="title" incremental="true">
-              <xforms:label>Title</xforms:label>
-            </xforms:input>
+            <xf:input ref="name" incremental="true" id="start">
+              <xf:label>Name</xf:label>
+            </xf:input>
+            <xf:input ref="title" incremental="true">
+              <xf:label>Title</xf:label>
+            </xf:input>
           </div>
-        </xforms:repeat>
+        </xf:repeat>
         
-        <xforms:trigger>
-          <xforms:label>Add Demo</xforms:label>
-          <xforms:action ev:event="DOMActivate">
-            <xforms:insert nodeset="person" at="index('speaker-repeat')" position="after" origin="instance('person')/person"/>
-            <xforms:setvalue ref="instance('person')/person/name" value="instance('person')/person/name"/>
-            <xforms:setvalue ref="instance('person')/person/title" value="instance('person')/person/title"/>
-          </xforms:action>
-        </xforms:trigger>
+        <xf:trigger>
+          <xf:label>Add Demo</xf:label>
+          <xf:action ev:event="DOMActivate">
+            <xf:insert nodeset="person" at="index('speaker-repeat')" position="after" origin="instance('person')/person"/>
+            <xf:setvalue ref="instance('person')/person/name" value="instance('person')/person/name"/>
+            <xf:setvalue ref="instance('person')/person/title" value="instance('person')/person/title"/>
+          </xf:action>
+        </xf:trigger>
         
-        <xforms:trigger>
-          <xforms:label>Remove Demo</xforms:label>
-          <xforms:action ev:event="DOMActivate">
-            <xforms:delete nodeset="//person[index('speaker-repeat')]"/>
-          </xforms:action>
-        </xforms:trigger>
+        <xf:trigger>
+          <xf:label>Remove Demo</xf:label>
+          <xf:action ev:event="DOMActivate">
+            <xf:delete nodeset="//person[index('speaker-repeat')]"/>
+          </xf:action>
+        </xf:trigger>
         
       </fieldset>
       
       <!--<div>
-        <xforms:submit submission="read">
-          <xforms:label>Reload</xforms:label>
-        </xforms:submit>
+        <xf:submit submission="read">
+          <xf:label>Reload</xf:label>
+        </xf:submit>
       </div>-->
       
       <div class="save">
-        <xforms:submit submission="save">
-          <xforms:label>Save</xforms:label>
-        </xforms:submit>
+        <xf:submit submission="save">
+          <xf:label>Save</xf:label>
+        </xf:submit>
       </div>
       
-    </xforms:group>
+    </xf:group>
     
     
     <div class="debug">
-      <xforms:output value="serialize(instance('data'),'yes')"/>
+      <xf:output value="serialize(instance('data'),'yes')"/>
     </div>
     
   </body>
