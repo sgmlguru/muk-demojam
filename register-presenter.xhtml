@@ -3,6 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/img/MUK-Logo.png"/>
+    
     <title>Add Demos</title>
     
     <style type="text/css">
@@ -28,7 +31,7 @@ label, legend {
 fieldset {
    margin-top: 30px;
    padding: 10px;
-   width: 600px;
+   width: 590px;
 }
 
 /* the labels are right-aligned in a 100px wide column */
@@ -130,10 +133,24 @@ p {
   border-style: solid;
 }
 
+.save {
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
     </style>
     
     <xforms:model>
-      <xforms:instance id="data" src="../../MUK-data/demojam/presenters.xml"/>
+      <xforms:instance id="data" src="../../MUK-data/demojam/presenters.xml" ev:event="xforms-ready"/>
+      
+      <xforms:instance id="cache">
+        <presenters xmlns="">
+          <person votes="0">
+            <name/>
+            <title/>
+          </person>
+        </presenters>
+      </xforms:instance>
       
       <xforms:instance id="person">
         <presenters xmlns="">
@@ -145,8 +162,9 @@ p {
       </xforms:instance>
       
       
-      <!--<xforms:submission id="save" method="post" action="xq/addSpeaker.xquery" ref="person"/>-->
-      <xforms:submission id="save" method="post" action="../../MUK-data/demojam/presenters.xml" ref="/presenters"/>
+      <xforms:submission id="save" method="put" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
+      <xforms:submission id="read" method="get" action="../../MUK-data/demojam/presenters.xml" ref="/presenters" replace="none"/>
+      
       
       <xforms:action ev:event="xforms-ready">
         <xforms:setfocus control="start"/>
@@ -155,6 +173,10 @@ p {
     
   </head>
   <body>
+    
+    <div class="img">
+      <h1><img src="resources/img/MUK-Logo.png" alt="Markup UK"/> MUK DemoJam Admin Page</h1>
+    </div>
     
     <!-- Add Speakers -->
     <xforms:group ref="/presenters">
@@ -176,13 +198,13 @@ p {
           <xforms:label>Add Demo</xforms:label>
           <xforms:action ev:event="DOMActivate">
             <xforms:insert nodeset="person" at="index('speaker-repeat')" position="after" origin="instance('person')/person"/>
-            <xforms:setvalue  ref="instance('person')/person/name" value="instance('person')/person/name"/>
+            <xforms:setvalue ref="instance('person')/person/name" value="instance('person')/person/name"/>
             <xforms:setvalue ref="instance('person')/person/title" value="instance('person')/person/title"/>
           </xforms:action>
         </xforms:trigger>
         
         <xforms:trigger>
-          <xforms:label>Delete Selected Demo</xforms:label>
+          <xforms:label>Remove Demo</xforms:label>
           <xforms:action ev:event="DOMActivate">
             <xforms:delete nodeset="//person[index('speaker-repeat')]"/>
           </xforms:action>
@@ -190,7 +212,13 @@ p {
         
       </fieldset>
       
-      <div>
+      <!--<div>
+        <xforms:submit submission="read">
+          <xforms:label>Reload</xforms:label>
+        </xforms:submit>
+      </div>-->
+      
+      <div class="save">
         <xforms:submit submission="save">
           <xforms:label>Save</xforms:label>
         </xforms:submit>

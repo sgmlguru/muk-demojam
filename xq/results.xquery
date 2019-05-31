@@ -11,6 +11,9 @@ return
 
 <html>
     <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../resources/img/MUK-Logo.png"/>
+    
     <title>Demojam Presentations</title>
       <style type="text/css">
             /* CSS for XForms input field alignment */
@@ -144,7 +147,7 @@ p {{
       </style>
     </head>
     <body>
-      <h1>Markup UK Demojam Results</h1>
+      <h1><img src="../resources/img/MUK-Logo.png" alt="Markup UK"/> Markup UK Demojam Results</h1>
       <p>{$total} votes</p>
       {
       let $winners := <ol>

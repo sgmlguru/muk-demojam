@@ -3,6 +3,8 @@ xquery version "1.0";
 declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
 <html>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../resources/img/MUK-Logo.png"/>
     <head>
     <title>Demojam Presentations</title>
       <style type="text/css">
@@ -137,7 +139,7 @@ p {{
       </style>
     </head>
     <body>
-      <h1>Markup UK Demojam</h1>
+      <h1><img src="../resources/img/MUK-Logo.png" alt="Markup UK"/> Markup UK Demojam</h1>
       <ol>
         {
           let $presenters := collection('/db/MUK-data/demojam/')

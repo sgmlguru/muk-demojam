@@ -3,6 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:my="test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/img/MUK-Logo.png"/>
+    
     <title>Vote for Your Favourite!</title>
     
     <style type="text/css">
@@ -151,6 +154,11 @@ p {
   </head>
   
   <body>
+    
+    <div class="img">
+      <h1><img src="resources/img/MUK-Logo.png" alt="Markup UK"/> MUK DemoJam Voting Page</h1>
+    </div>
+    
     <div>
       <xforms:select1 ref="instance('votes')" incremental="true" appearance="full">
         <xforms:label>Presentations</xforms:label>
