@@ -9,6 +9,5 @@
     <type>application</type>
     <target>muk-demojam</target>
     <prepare>pre-install.xql</prepare>
-    <finish>admin</finish>
-<deployed>2019-05-27T15:48:26.858+02:00</deployed>
+    <finish>post-install.xql</finish>
 </meta>
