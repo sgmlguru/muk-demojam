@@ -2,7 +2,7 @@ xquery version "3.1";
 
 let $base := '/db/MUK-data'
 let $base-collection := if (xmldb:collection-available(concat($base,'/demojam')))
-                        then ()
+                        then (concat($base,'/demojam'))
                         else (xmldb:create-collection($base,'demojam'))
 
 let $presenters := <presenters/>

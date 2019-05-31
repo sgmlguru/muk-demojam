@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meta xmlns="http://exist-db.org/xquery/repo">
     <description>MUK DemoJam admin and voting app</description>
-    <author>Ari Nordström and Tomos Hillman</author>
+    <author>Ari Nordström</author>
     <website>https://markupuk.org</website>
     <status>alpha</status>
     <license>GNU-LGPL</license>
