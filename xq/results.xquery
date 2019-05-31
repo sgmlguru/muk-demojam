@@ -2,8 +2,9 @@ xquery version "1.0";
 
 declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
-let $presenters := collection('/db/MUK-data/demojam/')
-let $total := sum($presenters/presenters/person/@votes!number())
+let $presenters := doc('../resources/xml/presenters.xml')
+
+let $total := sum($presenters//person/@votes!number())
 
 let $show := 3
 

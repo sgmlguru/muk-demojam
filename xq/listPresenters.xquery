@@ -142,8 +142,7 @@ p {{
       <h1><img src="../resources/img/MUK-Logo.png" alt="Markup UK"/> Markup UK Demojam</h1>
       <ol>
         {
-          let $presenters := collection('/db/MUK-data/demojam/')
-          for $person in $presenters/presenters/person
+          for $person in doc('../resources/xml/presenters.xml')//person
           order by util:random()
           return
           <li><b>{$person/name}</b> - {$person/title/text()}</li>

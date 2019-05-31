@@ -1,9 +1,9 @@
 xquery version "3.1";
 
-let $base := '/db/MUK-data'
-let $base-collection := if (xmldb:collection-available(concat($base,'/demojam')))
-                        then (concat($base,'/demojam'))
-                        else (xmldb:create-collection($base,'demojam'))
+let $base := '/db/apps/muk-demojam/resources'
+let $base-collection := if (xmldb:collection-available(concat($base,'/xml')))
+                        then (concat($base,'/xml'))
+                        else (xmldb:create-collection($base,'xml'))
 
 let $presenters := <presenters><person votes="0"><name/><title/></person></presenters>
 
